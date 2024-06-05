@@ -1,0 +1,5 @@
+Page loaded successfully
+Announcement elements found
+Coins to be delisted: ['OMG', 'WAVES', 'WNXM', 'XEM']
+Runtime: 2.0681979656219482 seconds
+Driver quit

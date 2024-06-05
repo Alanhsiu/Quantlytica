@@ -11,7 +11,7 @@ root_path = os.path.abspath(os.path.join(_, '..'))  # 返回根目录文件夹
 
 
 # k线数据路径
-kline_path = root_path + '/data/k线数据/'
+kline_path = root_path + '/data/swap/'
 
 # 回测信息配置
 start_date = '2021-01-01'  # 回测开始时间
@@ -27,4 +27,5 @@ white_list = ['BTC-USDT', 'ETH-USDT', 'XRP-USDT', 'SOL-USDT', 'ADA-USDT','DOGE-U
               'ICP-USDT','BICO-USDT','MASK-USDT','JASMY-USDT','BNB-USDT']  # 例：LUNA-USDT, 这里与实盘不太一样，需要有'-'
 # white_list=[]
 # 参与计算的所有因子，一次性计算节约时间，避免反复1_数据整理
-factor_class_list = ['PriceMa','QuoteVolumeStd','MarketCap_Max']
+factor_class_list = ['PriceMa','MarketCap_Max']
+# factor_class_list = ['PriceMa','QuoteVolumeStd','MarketCap_Max']

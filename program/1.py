@@ -68,7 +68,7 @@ def calc_factors(file_path, benchmark):
 
 if __name__ == '__main__':
     # 定义一个开始的基准时间，避免周期转换出现问题
-    benchmark = pd.DataFrame(pd.date_range(start='2017-01-01', end=end_date, freq='1H'))  # 创建2017-01-01至回测结束时间的1H列表
+    benchmark = pd.DataFrame(pd.date_range(start='2021-01-01', end=end_date, freq='1H'))  # 创建2017-01-01至回测结束时间的1H列表
     benchmark.rename(columns={0: 'candle_begin_time'}, inplace=True)
 
     # 标记开始时间
@@ -78,7 +78,8 @@ if __name__ == '__main__':
     symbol_file_path = glob(kline_path + '*USDT.csv')  # 获取kline_path路径下，所有以usdt.csv结尾的文件路径
 
     # 并行处理
-    multiply_process = True
+    # multiply_process = True
+    multiply_process = False
     if multiply_process:
         df_list = Parallel(n_jobs=max(os.cpu_count() - 1, 1))(
             delayed(calc_factors)(file_path, benchmark)
@@ -95,5 +96,5 @@ if __name__ == '__main__':
     all_stock_data = pd.concat(df_list, ignore_index=True)
     all_stock_data.sort_values('candle_begin_time', inplace=True)
     all_stock_data.reset_index(inplace=True, drop=True)
-    all_stock_data.to_pickle(f'{root_path}/data/数据整理/all_data_{hold_period}.pkl')
+    all_stock_data.to_pickle(f'{root_path}/data/clean/all_data_{hold_period}.pkl')
     print(datetime.now() - start_time)

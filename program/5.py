@@ -18,7 +18,7 @@ for factor_name, if_reverse, parameter_list in factor_list:
     factor_name_list.append(f'{factor_name}_{str(parameter_list)}_{if_reverse}')
 
 # read csv
-df = pd.read_csv(root_path + f'/data/指数结果/{str(factor_name_list)}_{str(index_name)}指数回测.csv', encoding='gbk', parse_dates=['candle_begin_time'])
+df = pd.read_csv(root_path + f'/data/result/{str(factor_name_list)}_{str(index_name)}指数回测.csv', encoding='gbk', parse_dates=['candle_begin_time'])
 df.sort_values(by='candle_begin_time', inplace=True)
 df = df[['candle_begin_time', '选币','开平仓标识','指数净值','btc_净值']]
 df.set_index('candle_begin_time', inplace=True)
@@ -35,5 +35,5 @@ df_resample.sort_values(by='candle_begin_time', inplace = True)
 df_resample.reset_index(inplace=True)
 print(df_resample.tail(60))
 # to csv
-df_resample.to_csv(root_path + f'/data/指数结果/{str(factor_name_list)}_{str(index_name)}_{str(config_frq)}周期指数回测.csv', encoding='gbk', index=False)
+df_resample.to_csv(root_path + f'/data/result/{str(factor_name_list)}_{str(index_name)}_{str(config_frq)}周期指数回测.csv', encoding='gbk', index=False)
 

@@ -30,7 +30,7 @@ benchmark = pd.DataFrame(pd.date_range(start='2017-01-01', end=end_date, freq='1
 benchmark.rename(columns={0: 'candle_begin_time'}, inplace=True)
 
 # ===导入数据
-df = pd.read_pickle(f'{root_path}/data/数据整理/all_data_{hold_period}.pkl')
+df = pd.read_pickle(f'{root_path}/data/clean/all_data_{hold_period}.pkl')
 print(df.tail(20))
 # 删除某些行数据
 if black_list:
@@ -85,7 +85,7 @@ select_coin['选币'] = select_coin['symbol'] + ' '
 # ===提供给老许换仓的时间和仓位的开盘价
 coin_rebalance = select_coin.copy()
 coin_rebalance = coin_rebalance[['candle_begin_time', 'symbol', 'open','close']]
-coin_rebalance.to_csv(root_path + f'/data/指数结果/{str(factor_name_list)}_{str(index_name)}指数rebalance.csv', encoding='gbk', index=False)
+coin_rebalance.to_csv(root_path + f'/data/result/{str(factor_name_list)}_{str(index_name)}指数rebalance.csv', encoding='gbk', index=False)
 
 # ===计算周期内的持仓收益
 group = select_coin.groupby('candle_begin_time')
@@ -135,7 +135,7 @@ equity.reset_index(inplace=True)
 equity['本周期多空涨跌幅'] = equity['涨跌幅']
 
 # 增加btc净值曲线
-btc = pd.read_csv(root_path + '/data/k线数据/BTC-USDT.csv', encoding='gbk', parse_dates=['candle_begin_time'], skiprows=1)
+btc = pd.read_csv(root_path + '/data/swap/BTC-USDT.csv', encoding='gbk', parse_dates=['candle_begin_time'], skiprows=1)
 btc['btc_涨跌幅'] = btc['close'].pct_change()
 equity = pd.merge(left=equity, right=btc[['candle_begin_time', 'btc_涨跌幅']], on=['candle_begin_time'], how='left')
 equity['btc_涨跌幅'].fillna(value=0, inplace=True)
@@ -154,7 +154,7 @@ Q_df= equity[col_list]
 # print(Q_df.tail(5))
 # exit()
 # 保存文件
-Q_df.to_csv(root_path + f'/data/指数结果/{str(factor_name_list)}_{str(index_name)}指数回测.csv', encoding='gbk', index=False)
+Q_df.to_csv(root_path + f'/data/result/{str(factor_name_list)}_{str(index_name)}指数回测.csv', encoding='gbk', index=False)
 
 
 # ===策略评价
