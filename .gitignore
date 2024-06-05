@@ -1,3 +1,4 @@
 .env
 bybit/config.py
 binance/config.py
+config.py

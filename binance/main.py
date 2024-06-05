@@ -13,9 +13,9 @@ import config
 
 from pybit.unified_trading import HTTP
 
-
 def setup_driver():
     service = Service('/usr/local/bin/chromedriver')
+    # service = Service('/home/b09901066/Quantlytica/chromedriver-linux64/chromedriver') # need to "sudo chmod +x /path/to/chromedriver"
 
     chrome_options = Options()
     chrome_options.add_argument("--headless") 
@@ -95,7 +95,7 @@ def main():
                 end_time = time.time()      
                 print(f"Runtime: {end_time - start_time} seconds", file=f, flush=True)
                 
-                time.sleep(3)
+                time.sleep(5)
 
         except Exception as e:
             print(f"Error: {e}", file=f, flush=True)
